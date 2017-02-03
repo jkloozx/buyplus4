@@ -1,0 +1,3 @@
+                                        <td class="text-left">
+                                            {$row['__FIELD__']}
+                                        </td>

@@ -1,0 +1,3 @@
+                                    <td class="text-left">
+                                        <a href="{:UField('list', $sort, '__FIELD__', $filter)}" class="{:CField($sort, '__FIELD__')}">__FIELD_TITLE__</a>
+                                    </td>

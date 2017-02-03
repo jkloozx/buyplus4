@@ -1,0 +1,72 @@
+<extend name="Common/layout" />
+
+<block name="content">
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-set" data-toggle="tooltip" title="保存" class="btn btn-primary"> <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('list')}" data-toggle="tooltip" title="取消" class="btn btn-default"> <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>__TITLE__</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Manage/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{:U('list')}">__TITLE__</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        设置__TITLE__
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <!-- __ACTION__ -->
+                    <form action="{:U('')}" method="post" enctype="multipart/form-data" id="form-set" class="form-horizontal">
+                        <if condition="ACTION_NAME eq 'edit'">
+                            <input type="hidden" name="__PK_FIELD__" id="input-__PK_FIELD__" value="{$data['__PK_FIELD__']}">
+                        </if>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                __FIELD_LIST__
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="appendJS">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+
+        $(function() {
+            // 自定义初始验证方法
+            $('#form-set').validate({});
+        });
+
+    </script>
+</block>

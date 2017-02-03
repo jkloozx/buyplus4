@@ -1,0 +1,99 @@
+<extend name="Common/layout" />
+
+<block name="content">
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-set" data-toggle="tooltip" title="保存" class="btn btn-primary"> <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('list')}" data-toggle="tooltip" title="取消" class="btn btn-default"> <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>会员登录日志</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Manage/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{:U('list')}">会员登录日志</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        设置会员登录日志
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <!-- __ACTION__ -->
+                    <form action="{:U('')}" method="post" enctype="multipart/form-data" id="form-set" class="form-horizontal">
+                        <if condition="ACTION_NAME eq 'edit'">
+                            <input type="hidden" name="member_login_log_id" id="input-member_login_log_id" value="{$data['member_login_log_id']}">
+                        </if>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-login_time">login_time</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="login_time" value="{$data['login_time']}" placeholder="login_time" id="input-login_time" class="form-control">
+                                        <if condition="isset($message['errorInfo']['login_time'])">
+                                            <label for="input-login_time" class="text-danger">{$message['errorInfo']['login_time']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-login_ip">登录IP</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="login_ip" value="{$data['login_ip']}" placeholder="登录IP" id="input-login_ip" class="form-control">
+                                        <if condition="isset($message['errorInfo']['login_ip'])">
+                                            <label for="input-login_ip" class="text-danger">{$message['errorInfo']['login_ip']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-login_ua">浏览器</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="login_ua" value="{$data['login_ua']}" placeholder="浏览器" id="input-login_ua" class="form-control">
+                                        <if condition="isset($message['errorInfo']['login_ua'])">
+                                            <label for="input-login_ua" class="text-danger">{$message['errorInfo']['login_ua']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="appendJS">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+
+        $(function() {
+            // 自定义初始验证方法
+            $('#form-set').validate({});
+        });
+
+    </script>
+</block>

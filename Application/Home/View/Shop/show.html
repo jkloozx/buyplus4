@@ -1,0 +1,463 @@
+<extend name="Common/layout" />
+
+<block name="container">
+
+    <div class="container">
+        <ul class="breadcrumb" id="ul-breadcrumb">
+            <li>
+                <a href="__ROOT__">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" id="a-breadcrumb-goods"></a>
+            </li>
+        </ul>
+        <div class="row">
+            <div id="content" class="product-detail col-sm-12">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <!--elevate zoom start-->
+                        <div class="elevate-zoom-wrapper">
+                            <div class="elevate-zoom-preview">
+                                <a href="javascript:;">
+                                    <img style="display:none;" id="elevate-zoom" src="" data-zoom-image="" class="img-responsive">
+                                </a>
+                                <!--  vcxcxcx     -->
+                            </div>
+                            <div id="product-thumbnail-gallery">
+                            </div>
+                        </div>
+                        <!--elevate zoom end--> </div>
+                    <div class="col-sm-7 product-info">
+                        <h1></h1>
+                        <ul class="product-brief-wrapper">
+                            <li>
+                                <span>型  号</span>
+                                9521
+                            </li>
+                            <li>
+                                <span>奖励积分</span>
+                                42
+                            </li>
+                            <li>
+                                <span>库存状态</span>
+                                <span id="span-stock_status"></span>
+                            </li>
+                        </ul>
+                        <div class="product-price-wrapper">
+                            <span class="price-new">￥<span id="price-new-value"></span></span>
+                            <span class="price-old">￥<span id="price-old-value"></span></span>
+                            <!-- <span>消费积分 100</span> -->
+                        </div>
+                        <hr>
+                        <div id="product">
+                            <!--<h3>货品</h3>-->
+                            <div class="form-group required" id="div-product" style="display: none;">
+                                <label class="control-label">货品</label>
+                                <div id="div-product-list">
+                                </div>
+                            </div>
+                            <!--<h3>配件</h3>-->
+                            <div class="form-group required">
+                                <label class="control-label">配件</label>
+                                <div id="input-option233">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="option[233][]" value="27" />
+                                        <span>耳机</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="option[233][]" value="25" />
+                                        <span>充电器</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="option[233][]" value="26" />
+                                        <span>保护膜</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="option[233][]" value="24" />
+                                        <span>数据线</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="product-cart-action">
+                                <div class="quantity-input-wrapper">
+                                    <input type="text" name="quantity" value="1" placeholder="数量" id="input-quantity" class="form-control" />
+                                    <a href="#" class="quantity-up">+</a>
+                                    <a href="#" class="quantity-down">-</a>
+                                </div>
+                                <button type="button" id="button-cart" data-loading-text="正在加载..." class="btn btn-primary">加入购物车</button>
+                                <input type="hidden" name="product_id" value="61" />
+                            </div>
+                        </div>
+                        <div class="wishlist-share">
+                            <a onclick="wishlist.add('61');">
+                                <i class="fa fa-heart"></i>
+                                收藏
+                            </a>
+                            <a onclick="compare.add('61');">
+                                <i class="fa fa-link"></i>
+                                对比
+                            </a>
+                        </div>
+                        <div class="rating">
+                            <p>
+                    <span class="fa fa-stack">
+                      <i class="fa fa-star on fa-stack-1x"></i>
+                    </span>
+                                <span class="fa fa-stack">
+                      <i class="fa fa-star on fa-stack-1x"></i>
+                    </span>
+                                <span class="fa fa-stack">
+                      <i class="fa fa-star on fa-stack-1x"></i>
+                    </span>
+                                <span class="fa fa-stack">
+                      <i class="fa fa-star on fa-stack-1x"></i>
+                    </span>
+                                <span class="fa fa-stack">
+                      <i class="fa fa-star off fa-stack-1x"></i>
+                    </span>
+                                <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 评价</a>
+                                /
+                                <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">如果您对本商品有什么问题或经验，请在此留下您的意见和建议！</a>
+                            </p>
+                            <hr>
+                            <!-- Baidu Share BEGIN -->
+                            <div class="bdsharebuttonbox">
+                                <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+                                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+                                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+                                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+                                <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+                                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+                            </div>
+                            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                            <!-- Baidu Share END -->
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab-description" data-toggle="tab">商品描述</a>
+                    </li>
+                    <li>
+                        <a href="#tab-specification" data-toggle="tab">商品属性</a>
+                    </li>
+                    <li>
+                        <a href="#tab-review" data-toggle="tab">商品评价 (已有N条评价)</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-description">
+
+                    </div>
+
+                    <div class="tab-pane" id="tab-specification">
+                        <table class="table table-bordered">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="tab-review">
+                        <form class="form-horizontal" id="form-review">
+                            <div id="review"></div>
+                            <h2>如果您对本商品有什么问题或经验，请在此留下您的意见和建议！</h2>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="input-name">您的姓名</label>
+                                    <input type="text" name="name" value="" id="input-name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="input-review">您的评价</label>
+                                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                                    <div class="help-block">
+                                        <span class="text-danger">注意</span>
+                                        评论内容不支持HTML代码！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label">顾客评分</label>
+                                    &nbsp;&nbsp;&nbsp; 差评&nbsp;
+                                    <input type="radio" name="rating" value="1" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="2" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="3" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="4" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="5" />
+                                    &nbsp;好评
+                                </div>
+                            </div>
+                            <div class="buttons clearfix">
+                                <div class="pull-right">
+                                    <button type="button" id="button-review" data-loading-text="正在加载..." class="btn btn-primary">继续</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="appendJS">
+    <script>
+        // 全局数据的初始化
+        $(function() {
+            goods_id = {$goods_id};
+        });
+    </script>
+
+    <script>
+        // 初始化 面包屑导航
+        $(function() {
+            var url = "{:U('/breadcrumb')}";
+            var data = {
+                goods_id: goods_id,
+            };
+            $.get(url, data, function(resp) {
+                if (resp.error != 0) {
+                    console.log(resp.errorInfo);
+                    return ;
+                }
+
+                var html = '';
+                $.each(resp.data, function(i, row) {
+                    html += '<li>' +
+                            '<a href="' +
+                            row.url +
+                            '">' +
+                            row.title +
+                            '</a>' +
+                            '</li>';
+                });
+                // 在第一个li后, 插入分类的导航
+                $('#ul-breadcrumb>li:eq(0)').after(html);
+
+
+            }, 'json');
+        });
+    </script>
+
+    <script src="__PUBLIC__/Home/elevateZoom/jquery.elevateZoom.min.js"></script>
+    <script src="__PUBLIC__/Home/fancybox/jquery.fancybox.pack.js"></script>
+
+    <script>
+        // 商品基本信息(商品, 货品, 相册, 及其关联数据)
+        $(function(){
+            var url = "{:U('/goods/show')}";
+            var data = {
+                goods_id: goods_id,
+            };
+            $.get(url, data, function(resp) {
+                if (resp.error != 0) {
+                    console.log(resp.errorInfo);
+                    return ;
+                }
+
+                var goods = resp.data;
+
+                // 一: 填充面包屑导航
+                $('#a-breadcrumb-goods').html(goods.name);
+
+                // 二: 展示相册部分
+                var galleryList = goods.galleryList;
+                if (galleryList.length > 0) {
+                    // 存在相册图像
+                    // 展示第一张初始图像
+                    $('#elevate-zoom').attr('src', '__PUBLIC__/Thumb/' + galleryList[0].image_medium).data('zoom-image', '__PUBLIC__/Thumb/' +galleryList[0].image_big).show();
+
+                    // 遍历展示所有的小图
+                    var html = '';
+                    $.each(galleryList, function(i, gallery) {
+                        html += '<a data-zoom-image="__PUBLIC__/Thumb/' +
+                                gallery.image_big + '" data-image="__PUBLIC__/Thumb/' +
+                                gallery.image_medium + '" data-upate="" class="elevatezoom-gallery';
+                        if (0 == i) {
+                            html += ' active';
+                        }
+                        html += '" href="__PUBLIC__/Thumb/' +
+                                gallery.image_big + '">';
+                        html += '<img src="__PUBLIC__/Thumb/' +
+                                gallery.image_small + '" width="60">';
+                        html += '</a>';
+                    });
+
+                    $('#product-thumbnail-gallery').html(html);
+
+                    // 触发放大镜插件
+
+                    if ($(window).width() >= 768) {
+                        // 如果窗口 大于768, 则触发 elevateZoom插件
+                        $('#elevate-zoom').elevateZoom({
+                            zoomWindowFadeIn: 500,//镜头窗口淡入速度
+                            zoomWindowFadeOut: 500,//镜头窗口淡出速度
+                            lensFadeIn: 500,//透镜淡入速度
+                            lensFadeOut: 500,//透镜淡出速度
+                            // lensShape: 'basic',
+                            // lensSize: 150,
+                            zoomWindowOffetx: 10,
+                            // zoomWindowWidth: 450,
+                            // zoomWindowHeight: 450,
+                            borderSize: 1,
+                            borderColour: '#eaeaea',
+                            gallery: 'product-thumbnail-gallery',
+                            galleryActiveClass: 'active',
+                            cursor:'pointer',
+                        });
+
+                        // 支持 点击的fancybox灯箱
+//                        $('#elevate-zoom').bind('click', function(e) {
+//                            var ez = $('#elevate-zoom').data('elevateZoom');
+//                            $.fancybox(ez.getGalleryList());
+//                            return false;
+//                        });
+                    } else {
+                        $('.elevatezoom-gallery').fancybox();
+                        $('.elevate-zoom-preview a').bind('click', function(e) {
+                            $('.elevatezoom-gallery').eq(0).trigger('click');
+                            return false;
+                        });
+                    }
+
+                } else {
+                    // 没有相册图像
+                    $('#elevate-zoom').attr('src', '__PUBLIC__/Thumb/' + goods.image_thumb).show();
+                }
+
+                // 三: 商品信息
+                $('.product-info:eq(0) > h1').html(goods.name);
+                $('#span-stock_status').html(goods.stock_status_title);
+                $('#price-new-value').html(goods.price);
+                $('#price-old-value').html(goods.market_price);
+
+                // 四: 货品的展示
+                productList = goods.productList;
+                if (productList.length > 0) {
+                    var html = '';
+                    $.each(productList, function(i, product) {
+                        html += '<label class="radio product">' +
+                                '<input type="radio" name="product_id" value="' +
+                                product.product_id + '"';
+                        if (product.promoted == '1') {
+                            html += ' checked';
+                        }
+                        html +='/><span>' +
+                                product.option + '</span></label>&nbsp;';
+                        // 当前是否为默认货品, 影响价格
+                        if (product.promoted == '1') {
+                            updatePrice(goods, product);
+                        }
+                    });
+                    // 加入到货品列表
+                    $('#div-product-list').append(html);
+                    $('#div-product').show();
+
+                    // 增加事件监听
+                    $('label.product').click(function(evt) {
+                        var currProductId = $(this).find(':radio').eq(0).val();
+
+                        var currProduct;
+                        $.each(productList, function(i, product) {
+                            if(product.product_id == currProductId) {
+                                currProduct = product;
+                                return false;
+                            }
+                        });
+                        updatePrice(goods, currProduct);
+
+//                        evt.preventDefault();// 取消默认
+//                        evt.stopPropagation();// 阻止传播
+                    });
+
+
+                } else {
+                    // 没有货品
+                }
+
+
+                // 五, 属性列表
+                var html = '';
+                $.each(attributeList=goods.attributeList, function(i, attribute) {
+                    html += '<tr><td>' +
+                            attribute.attribute_title + '</td><td>';
+                    if (attribute.attribute_type_title == 'text') {
+                        html += attribute.value;
+                    } else {
+                        html += attribute.valuelist;
+                    }
+                    html += '</td></tr>';
+                });
+
+                $('#tab-specification>table>tbody').append(html);
+
+                // 六, 商品描述
+                $('#tab-description').append(goods.description);
+
+
+
+
+            }, 'json');
+        });
+
+        function updatePrice(goods, product)
+        {
+            goods.price = Number(goods.price);
+            product.product_price = Number(product.product_price);
+            switch (product.price_drift) {
+                case '+':
+                    var price = goods.price + product.product_price;
+                    break;
+                case '-':
+                    var price = goods.price - product.product_price;
+                    break;
+                case '=':
+                    var price = product.product_price;
+                    break;
+                default:
+                    var price = goods.price;
+                    break;
+            }
+            $('#price-new-value').html(price);
+        }
+    </script>
+
+
+    <script>
+        // 添加到购物车
+        $(function(){
+            $('#button-cart').click(function(evt) {
+                var url = "{:U('/addToCart')}";
+                var data = {
+                    goods_id: goods_id,
+                    product_id: $(':radio[name=product_id]:checked').val(),
+                    buy_quantity: $('#input-quantity').val(),
+                };
+                $.post(url, data, function(resp) {
+                    if (resp.error != 0) {
+                        console.log(resp.errorInfo);
+                        return ;
+                    }
+
+                    refreshCart();// 刷新右上角的购物车即可, 独立的, 在多数页面都需要使用的
+                    $(window).scrollTop(10);
+                }, 'json');
+
+                evt.preventDefault();
+            });
+        })
+    </script>
+
+</block>
+

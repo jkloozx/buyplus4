@@ -1,0 +1,68 @@
+<extend name="Common/layout" />
+
+<block name="appendJS">
+    <script>
+
+
+        function orderState() {
+            // 会话数据, 会员数据决定的 当前的订单
+//                error: function(xhr, textStatus) {
+//                    if (textStatus == 'timeout') {
+//                        // 重新发出ajax请求
+//                        orderState();
+//                    }
+//                },
+            $.ajax({
+                type: 'get',
+//                timeout: 3000,
+                url: "{:U('/orderState')}",
+                dataType: 'json',
+                success: function(resp) {
+                    if (resp.error == 0) {
+                        // 订单处理成功,
+                        $('#h1-orderStatus').show();
+                        $('#span-orderStatus').html('订单成功');//. 订单号为:' + resp.data.order_sn);
+                        clearInterval(timer);
+                    } else if (resp.error == 1) {
+                        // 失败
+                        $('#h1-orderStatus').show();
+                        $('#span-orderStatus').html('订单失败');
+                        clearInterval(timer);
+                    } else if (resp.error == 2) {
+                        $('#h1-orderStatus').show();
+                        $('#span-orderStatus').html('处理中');
+                    }
+
+                }
+            });
+        }
+        $(function() {
+            timer = setInterval(orderState, 1000);
+
+//            orderState();
+        });
+    </script>
+
+</block>
+
+<block name="container">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{:U('/')}"><i class="fa fa-home"></i></a></li>
+            <li><a href="javascript:;">结账</a></li>
+        </ul>
+        <div class="row">
+            <div id="content" class="col-sm-12">
+
+                <!--<h1>订单处理中..., 前面有23个订单</h1>-->
+                <h1>订单处理中... </h1>
+                <h1 id="h1-orderStatus" style="display: none;">当前状态为: <span id="span-orderStatus"></span></h1>
+                <div class="buttons">
+                    <div class="pull-left">
+                        <a href="{:U('/')}" class="btn btn-default">继续购物</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

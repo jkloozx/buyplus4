@@ -1,0 +1,9 @@
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-__FIELD__">__FIELD_TITLE__</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="__FIELD__" value="{$data['__FIELD__']}" placeholder="__FIELD_TITLE__" id="input-__FIELD__" class="form-control">
+                                        <if condition="isset($message['errorInfo']['__FIELD__'])">
+                                            <label for="input-__FIELD__" class="text-danger">{$message['errorInfo']['__FIELD__']}</label>
+                                        </if>
+                                    </div>
+                                </div>

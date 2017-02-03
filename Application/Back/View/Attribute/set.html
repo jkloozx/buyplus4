@@ -1,0 +1,125 @@
+<extend name="Common/layout" />
+
+<block name="content">
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-set" data-toggle="tooltip" title="保存" class="btn btn-primary"> <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('list')}" data-toggle="tooltip" title="取消" class="btn btn-default"> <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>商品属性</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Manage/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{:U('list')}">商品属性</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        设置商品属性
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <!-- __ACTION__ -->
+                    <form action="{:U('')}" method="post" enctype="multipart/form-data" id="form-set" class="form-horizontal">
+                        <if condition="ACTION_NAME eq 'edit'">
+                            <input type="hidden" name="attribute_id" id="input-attribute_id" value="{$data['attribute_id']}">
+                        </if>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-attribute_title">属性标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="attribute_title" value="{$data['attribute_title']}" placeholder="属性标题" id="input-attribute_title" class="form-control">
+                                        <if condition="isset($message['errorInfo']['attribute_title'])">
+                                            <label for="input-attribute_title" class="text-danger">{$message['errorInfo']['attribute_title']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-type_id">所属商品类型</label>
+                                    <div class="col-sm-10">
+                                        <select name="type_id" id="input-type_id" class="form-control">
+                                            <volist name="typeList" id="type">
+                                                <option value="{$type['type_id']}" <if condition="$type['type_id'] eq $data['type_id']"> selected </if>>{$type['type_title']}</option>
+                                            </volist>
+                                        </select>
+                                        <if condition="isset($message['errorInfo']['type_id'])">
+                                            <label for="input-type_id" class="text-danger">{$message['errorInfo']['type_id']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-attribute_type_id">所属输入类型</label>
+                                    <div class="col-sm-10">
+                                        <select name="attribute_type_id" id="input-attribute_type_id" class="form-control">
+                                            <volist name="attributeTypeList" id="attribute_type">
+                                                <option value="{$attribute_type['attribute_type_id']}" <if condition="$attribute_type['attribute_type_id'] eq $data['attribute_type_id']"> selected </if>>{$attribute_type['attribute_type_title']}</option>
+                                            </volist>
+                                        </select>
+                                        <if condition="isset($message['errorInfo']['attribute_type_id'])">
+                                            <label for="input-attribute_type_id" class="text-danger">{$message['errorInfo']['attribute_type_id']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-option_list">选项预设值</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="option_list" placeholder="选项列表, 每行表示一个选项" id="input-option_list" class="form-control">{$optionList}</textarea>
+                                        <if condition="isset($message['errorInfo']['option_list'])">
+                                            <label for="input-option_list" class="text-danger">{$message['errorInfo']['option_list']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-sort_number">排序</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="sort_number" value="{$data['sort_number']|default=0}" placeholder="排序" id="input-sort_number" class="form-control">
+                                        <if condition="isset($message['errorInfo']['sort_number'])">
+                                            <label for="input-sort_number" class="text-danger">{$message['errorInfo']['sort_number']}</label>
+                                        </if>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="appendJS">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+
+        $(function() {
+            // 自定义初始验证方法
+            $('#form-set').validate({});
+        });
+
+    </script>
+</block>

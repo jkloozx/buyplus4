@@ -1,0 +1,108 @@
+<extend name="Common/layout" />
+
+<block name="container">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">购物车内的商品</a>
+            </li>
+        </ul>
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <h1>购物车内的商品 &nbsp;(0.00kg)</h1>
+                    <div class="table-responsive" id="div-wareList">
+
+
+
+                    </div>
+
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="text-right"> <strong>商品总额:</strong>
+                                </td>
+                                <td class="text-right">￥<span id="cart_total_price"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="pull-left">
+                        <a href="{:U('/')}" class="btn btn-default">继续购物</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="{:U('/checkout')}" class="btn btn-primary">去结账</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="appendJS">
+
+    <script>
+
+        $(function() {
+            var url = "{:U('/cartInfo')}";// http://圆通/订单进度查询
+            var data = {};
+            $.get(url, data, function(resp) {
+                // 购物车信息
+                var cart = resp.data.cart;
+                $('#cart-total-quantity').html(cart.total_quantity);
+                $('#cart-total-price').html(cart.total);
+
+                if (cart.total_quantity == 0) {
+                    // 当前购物车没有商品, 回到首页
+                    location.href = "{:U('/')}";
+                }
+
+                // 购物车有商品
+                var html = '<table class="table table-bordered"><thead><tr><td class="text-center">图片</td><td class="text-left">商品名称</td><td class="text-left">型号</td><td class="text-left">数量</td><td class="text-right">单价</td><td class="text-right">总计</td></tr></thead><tbody>';
+                var wareList = resp.data.wareList;
+                $.each(wareList, function(key, ware) {
+                    html += '<tr><td class="text-center"><a href="' +
+                            ware.url + '"><img src="__PUBLIC__/Thumb/' +
+                            ware.image_thumb + '" alt="" title="2" class="img-thumbnail" style="max-height: 47px;"/></a>' +
+                            '</td><td class="text-left"><a href="' +
+                            ware.url + '">' +
+                            ware.name + '</a></td><td class="text-left">' +
+                            ware.option + '</td><td class="text-left"><div class="input-group btn-block" style="max-width: 200px;"><input type="text" name="" value="' +
+                            ware.buy_quantity + '" size="1" class="form-control" id="input-ware-' +
+                            key + '"/><span class="input-group-btn"><button type="button" data-toggle="tooltip" title="更新" class="btn btn-primary button-ware-refresh" data-key="' +
+                            key + '"><i class="fa fa-refresh"></i></button><button type="button" data-toggle="tooltip" title="移除" class="btn btn-danger"><i class="fa fa-remove"></i></button></span></div></td><td class="text-right">￥' +
+                            ware.real_price + '</td><td class="text-right">￥' +
+                            ware.total_price+'</td></tr>';
+                });
+
+                html  += '</tbody></table>';
+
+                $('#div-wareList').empty().append(html);
+
+                $('#cart_total_price').html(cart.total);
+
+                // 更新事件
+                $('.button-ware-refresh').click(function(evt) {
+                    var url = '{:U("/updateQuantity")}';
+                    var key = $(this).data('key');
+                    var data = {
+                        key: key,
+                        buy_quantity: $('#input-ware-' + key).val(),
+                    };
+                    $.post(url, data, function(resp){
+                        alert('更新成功');
+                    }, 'json');
+
+                });
+
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,132 @@
+<extend name="Common/layout" />
+
+<block name="container">
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <div class="content_top">
+
+                    <include file="Shop/slideShow" />
+
+                    <h2 class="widget-title">
+                        <span>推荐商品</span>
+                    </h2>
+
+                    <h2 class="widget-title">
+                        <span>最新商品</span>
+                    </h2>
+                    <div class="row" id="div-new">
+                    </div>
+
+                    <h2 class="widget-title">
+                        <span>特价商品</span>
+                    </h2>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="appendJS" >
+    <script>
+        $(function(){
+            var url = '{:U("/goods/new")}';
+            var data = {
+                limit: 4,
+            };
+            $.get(url, data, function(resp) {
+                if (resp.error != 0) {
+                    console.log(resp.errorInfo);
+                    return ;
+                }
+
+                var html = '';
+                $.each(resp.data, function(i, row) {
+                    console.log(row);
+                    html += '<div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">';
+                    html += '<div class="product-wrapper">';
+
+                    html += '<div class="product-image">';
+
+                    html += '<a href="'+ row.url + '">';
+                    // {:U()}
+
+                    html += '<img src="__PUBLIC__/Thumb/' + row.image_thumb + '" alt="商品图像" title="'+row.name +'" class="img-responsive" />';
+                    html += '</a>';
+                    html += '</div>';
+
+                    html += '<div class="product-info">';
+                    html += '<div class="product-name">';
+                    html += '<a href="'+row.url+'">' + row.name + '</a>';
+                    html += '</div>';
+
+                    html += '<div class="product-rating">' +
+                            '<span class="fa fa-stack">' +
+                            '<i class="fa fa-star fa-stack-2x"></i>' +
+                            '</span><' +
+                            'span class="fa fa-stack">' +
+                            '<i class="fa fa-star fa-stack-2x"></i>' +
+                            '</span>' +
+                            '<span class="fa fa-stack">' +
+                            '<i class="fa fa-star fa-stack-2x"></i>' +
+                            '</span>' +
+                            '<span class="fa fa-stack">' +
+                            '<i class="fa fa-star fa-stack-2x"></i>' +
+                            '</span>' +
+                            '<span class="fa fa-stack">' +
+                            '<i class="fa fa-star fa-stack-2x"></i>' +
+                            '</span>' +
+                            '</div>';
+
+                    html += '<div class="product-price">' +
+                            '<span class="price-new">￥'+ row.price + '</span>' +
+                            '<span class="price-old">￥' + row.market_price + '</span>' +
+                            '</div>';
+
+                    html += '<div class="product-action">' +
+                            '<button type="button" class="add-to-cart">' +
+                    '<i class="fa fa-shopping-cart"></i>' +
+                    '<span>加入购物车</span>' +
+                    '</button>' +
+                            '<div class="ps-add-buyincang" id="btn-visible">' +
+                            '<button type="button" class="wishlist">' +
+                    '<i class="fa fa-heart-o"></i>' +
+                    '<span>收藏</span>' +
+                            '</button>' +
+                            '<button type="button" class="compare">' +
+                            '<i class="fa fa-bars"></i>' +
+                            '<span>对比</span>' +
+                            '</button>' +
+                            '</div>' +
+                            '</div>';
+
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+
+
+                });
+                $('#div-new').append(html);
+            }, 'json');
+
+        });
+
+    </script>
+
+    <script>
+        $(function() {
+           $.ajax({
+               type: 'GET',
+//               url: 'http://php.kang.com/ajax.php',
+               url: 'ajax.php',// 当前域
+               success: function(resp) {
+                   console.log(resp);
+               }
+           });
+        });
+    </script>
+</block>

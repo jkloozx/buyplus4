@@ -1,0 +1,31 @@
+<tr id="tr-product-{$product['product_id']}">
+    <volist name="product['optionList']" id="option">
+        <td class="text-left">
+            {$option['option_value']}
+        </td>
+    </volist>
+
+    <td class="text-right">
+        <input type="text" name="product[{$product['product_id']}][product_quantity]" id="input-product_quantity-{$product['product_id']}" value="{$product['product_quantity']}" placeholder="商品数量" class="form-control" />
+    </td>
+    <td class="text-right">
+        <select name="" id="select-price_drift_id-{$product['product_id']}" class="form-control">
+            <volist name="priceDriftList" id="priceDrift">
+                <option <if condition="$priceDrift['price_drift_id'] eq $product['price_drift_id']"> selected</if> value="{$priceDrift['price_drift_id']}">{$priceDrift['title']}</option>
+            </volist>
+        </select>
+        <input type="text" name="" id="input-product_price-{$product['product_id']}" value="{$product['product_price']}" placeholder="销售价格" class="form-control" />
+    </td>
+
+    <td class="text-left">
+        <input type="checkbox" class="form-control" id="input-promoted-{$product['product_id']}" name="" value="1"<if condition="$product['promoted']"> checked</if>>
+    </td>
+    <td class="text-left">
+        <input type="checkbox" class="form-control" id="input-enabled-{$product['product_id']}" name="" value="1"<if condition="$product['enabled']"> checked</if>>
+    </td>
+    <td>
+        <a href="" id="" class="btn btn-default">删</a>
+        <a href="" id="" class="btn btn-default">更</a>
+
+    </td>
+</tr>

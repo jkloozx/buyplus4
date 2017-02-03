@@ -1,0 +1,97 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="logo">
+                    <a href="">
+                        <img src="__PUBLIC__/Home/image/logo3.png" title="BuyPlus(败家Shopping）" alt="BuyPlus(败家Shopping）" class="img-responsive" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-8 mini-cart">
+                <div id="cart">
+                    <a href="" class="cart-info">
+                  <span class="cart-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                  </span>
+                        <span id="cart-total"><span id="cart-total-quantity">0</span> 个商品 - ￥<span id="cart-total-price">0</span></span>
+                    </a>
+                    <ul id="ul-warelist" class="cart-content dropdown-menu hidden-sm hidden-xs">
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function refreshCart()
+    {
+        var url = "{:U('/cartInfo')}";
+        var data = {};
+        $.get(url, data, function(resp) {
+            // 购物车信息
+            var cart = resp.data.cart;
+            $('#cart-total-quantity').html(cart.total_quantity);
+            $('#cart-total-price').html(cart.total);
+            // 商品信息
+            if (0 == cart.total_quantity) {
+                html = '<li><p class="text-center empty">您的购物车内没有商品！</p></li>';
+            } else {
+                html = '<li>' +
+                        '<table class="table table-striped">' +
+                        '<tbody>';
+                $.each(resp.data.wareList, function(key, ware) {
+                    html += '<tr><td class="text-center"><a href="' +
+                            ware.url +'">' +
+                            '<img src="__PUBLIC__/Thumb/' +
+                            ware.image_thumb +'" alt="" title="" style="max-height: 47px;" class="img-thumbnail">' +
+                            '</a></td>' +
+                            '<td class="text-left">' +
+                            '<a href="' +
+                            ware.url + '">' +
+                            ware.name + '</a><br>' +
+                            'x ' +
+                            ware.buy_quantity;
+                    if ('option' in ware) {
+                            html += '<br>' + ware.option;
+                    }
+                    html += '</td>' +
+                            '<td class="text-right">' +
+                            '￥' + ware.total_price +
+                            '<br><a class="remove" data-key="' +
+                            key + '">移除</a>' +
+                            '</td>' +
+                            '</tr>';
+                });
+                html += '</tbody></table></li>';
+            }
+            // 其他的链接
+            html += '<li><div><table class="table table-bordered"><tbody><tr><td class="text-right"><strong>商品总额</strong></td><td class="text-right">￥' +
+                    cart.total + '</td></tr></tbody> </table>';
+            html += '<p class="text-right"><a href="{:U('/cart')}"><strong><i class="fa fa-shopping-cart"></i>查看购物车</strong></a>&nbsp;&nbsp;&nbsp;<a href="{:U('/checkout')}"><strong><i class="fa fa-share"></i>去结账</strong></a></p></div></li>';
+
+            $('#ul-warelist').empty().append(html);
+
+            // 绑定删除事件
+            $('#ul-warelist a.remove').click(function(evt) {
+                var url = "{:U('/removeFromCart')}";
+                var data = {
+                    key: $(this).data('key'),
+                };
+                $.post(url, data, function(resp) {
+                    refreshCart();
+                }, 'json');
+            });
+        }, 'json');
+    }
+
+    $(function() {
+        refreshCart();
+    });
+
+</script>

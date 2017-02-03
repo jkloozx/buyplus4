@@ -1,0 +1,163 @@
+<extend name="Common/layout" />
+<block name="content">
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-product" data-toggle="tooltip" title="保存" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('list')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>商品管理</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Manage/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">商品选项管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        商品选项管理
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="" method="post" enctype="multipart/form-data" id="form-product" class="form-horizontal">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-option" data-toggle="tab">选项设置</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content">
+
+                            <div class="tab-pane active" id="tab-option">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-option0">
+                                                <div class="table-responsive">
+                                                    <table id="table-product" class="table table-striped table-bordered table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <volist name="optionList" id="option">
+                                                                <td class="text-left">{$option['attribute_title']}</td>
+                                                            </volist>
+
+                                                            <td class="text-left">库存</td>
+                                                            <td class="text-left">销售价格</td>
+                                                            <td>推荐</td>
+                                                            <td>可用</td>
+                                                            <td>操作</td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <volist name="productList" id="product">
+                                                            <include file="Goods/product_row" />
+                                                        </volist>
+
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <td><a class="btn btn-primary" href="" id="a-add">添加</a></td>
+                                                        </tr>
+                                                        <tr id="">
+                                                                <volist name="optionList" id="option">
+                                                                    <td class="text-left">
+                                                                        <select name="" class="form-control" id="select-option-{$option['goods_attribute_id']}">
+                                                                            <volist name="option['valueList']" id="value">
+                                                                                <option value="{$value['goods_attribute_option_id']}">
+                                                                                    {$value['option_value']}
+                                                                                </option>
+                                                                            </volist>
+                                                                        </select>
+                                                                    </td>
+
+                                                                </volist>
+
+                                                                <td class="text-right">
+                                                                    <input type="text" name="" id="input-product_quantity" value="0" placeholder="商品数量" class="form-control" />
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <select name="" id="select-price_drift_id" class="form-control">
+                                                                        <volist name="priceDriftList" id="priceDrift">
+                                                                            <option value="{$priceDrift['price_drift_id']}">{$priceDrift['title']}</option>
+                                                                        </volist>
+                                                                    </select>
+                                                                    <input type="text" name="" id="input-product_price" value="0" placeholder="销售价格" class="form-control" />
+                                                                </td>
+
+                                                                <td class="text-left">
+                                                                    <input type="checkbox" class="form-control" id="input-promoted" name="" value="1">
+                                                                </td>
+                                                                <td class="text-left">
+                                                                    <input type="checkbox" class="form-control" id="input-enabled" name="" value="1" checked>
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="appendJS">
+    <script>
+        $(function(){
+
+            $('#a-add').click(function(evt) {
+                // 获取当前用户所选择全部数据
+                var data = {
+                    goods_id: {$goods_id},
+                    option: []
+                };
+//                先获取选项的值
+                $('select[id^=select-option-]').each(function(i){
+                    // 确定当前的选项值
+                    data.option.push($(this).val());
+                });
+
+                data.product_quantity = $('#input-product_quantity').val();
+                data.price_drift_id = $('#select-price_drift_id').val();
+                data.product_price = $('#input-product_price').val();
+                data.promoted = $('#input-promoted').prop('checked') ? '1' : '0';
+                data.enabled = $('#input-enabled').prop('checked') ? '1' : '0';
+
+                // console.log(data);
+
+                // ajax添加数据
+                var url = "{:U('ajax', ['operate'=>'addProduct'])}";
+                $.post(url, data, function(resp){
+                    $('#table-product>tbody').append(resp);// resp 生成的tr的HTML代码
+                });
+
+                evt.preventDefault();
+            });
+        });
+
+    </script>
+</block>
